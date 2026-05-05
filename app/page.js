@@ -1,5 +1,5 @@
-'use client'
-import { useEffect, useRef } from 'react'
+"use client";
+import { useEffect, useRef } from "react";
 
 /* ─────────────────────────────────────────────────────────────────────────
    NAV
@@ -12,13 +12,23 @@ function Nav() {
         Aura
       </a>
       <ul className="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#privacy">Privacy</a></li>
-        <li><a href="#download">Download</a></li>
-        <li><a href="#download" className="nav-cta">Download Free</a></li>
+        <li>
+          <a href="#features">Features</a>
+        </li>
+        <li>
+          <a href="#privacy">Privacy</a>
+        </li>
+        <li>
+          <a href="#download">Download</a>
+        </li>
+        <li>
+          <a href="#download" className="nav-cta">
+            Download Free
+          </a>
+        </li>
       </ul>
     </nav>
-  )
+  );
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -70,13 +80,11 @@ function BrowserMockup() {
               <div className="mock-card" />
             </div>
           </div>
-          <div className="mock-privacy-pill">
-            🛡 14 trackers blocked
-          </div>
+          <div className="mock-privacy-pill">🛡 14 trackers blocked</div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -93,7 +101,8 @@ function Hero() {
           Now in active development &middot; <strong>Beta coming soon</strong>
         </div>
         <h1 className="hero-title animate-fade-up delay-1">
-          The browser that works<br />
+          The browser that works
+          <br />
           <em>the way you do</em>
         </h1>
         <p className="hero-sub animate-fade-up delay-2">
@@ -103,7 +112,13 @@ function Hero() {
         <div className="hero-actions animate-fade-up delay-3">
           <a href="#download" className="btn-primary">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8 2v9M4 8l4 4 4-4M2 14h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+              <path
+                d="M8 2v9M4 8l4 4 4-4M2 14h12"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
             Download for Windows
           </a>
@@ -114,22 +129,58 @@ function Hero() {
         <div className="hero-meta animate-fade-in delay-4">
           <span>
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <circle cx="6.5" cy="6.5" r="5.5" stroke="#0db89e" strokeWidth="1.4"/>
-              <path d="M4.5 6.5l1.5 1.5L8.5 5" stroke="#0db89e" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle
+                cx="6.5"
+                cy="6.5"
+                r="5.5"
+                stroke="#0db89e"
+                strokeWidth="1.4"
+              />
+              <path
+                d="M4.5 6.5l1.5 1.5L8.5 5"
+                stroke="#0db89e"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
             Free forever
           </span>
           <span>
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <circle cx="6.5" cy="6.5" r="5.5" stroke="#0db89e" strokeWidth="1.4"/>
-              <path d="M4.5 6.5l1.5 1.5L8.5 5" stroke="#0db89e" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle
+                cx="6.5"
+                cy="6.5"
+                r="5.5"
+                stroke="#0db89e"
+                strokeWidth="1.4"
+              />
+              <path
+                d="M4.5 6.5l1.5 1.5L8.5 5"
+                stroke="#0db89e"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
             No data collection
           </span>
           <span>
             <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
-              <circle cx="6.5" cy="6.5" r="5.5" stroke="#0db89e" strokeWidth="1.4"/>
-              <path d="M4.5 6.5l1.5 1.5L8.5 5" stroke="#0db89e" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
+              <circle
+                cx="6.5"
+                cy="6.5"
+                r="5.5"
+                stroke="#0db89e"
+                strokeWidth="1.4"
+              />
+              <path
+                d="M4.5 6.5l1.5 1.5L8.5 5"
+                stroke="#0db89e"
+                strokeWidth="1.4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
             Built on Electron + Chromium
           </span>
@@ -137,7 +188,7 @@ function Hero() {
       </div>
       <BrowserMockup />
     </section>
-  )
+  );
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -148,17 +199,23 @@ function StatsBar() {
     <div className="stats-bar">
       <div className="stats-inner">
         <div className="stat-item">
-          <div className="stat-num">118<span>+</span></div>
+          <div className="stat-num">
+            118<span>+</span>
+          </div>
           <div className="stat-label">Features built</div>
         </div>
         <div className="stat-divider" />
         <div className="stat-item">
-          <div className="stat-num">200<span>+</span></div>
+          <div className="stat-num">
+            200<span>+</span>
+          </div>
           <div className="stat-label">Data broker removals</div>
         </div>
         <div className="stat-divider" />
         <div className="stat-item">
-          <div className="stat-num">50<span>ms</span></div>
+          <div className="stat-num">
+            50<span>ms</span>
+          </div>
           <div className="stat-label">Tab switch time</div>
         </div>
         <div className="stat-divider" />
@@ -168,12 +225,14 @@ function StatsBar() {
         </div>
         <div className="stat-divider" />
         <div className="stat-item">
-          <div className="stat-num"><span>&lt;</span>1<span>s</span></div>
+          <div className="stat-num">
+            <span>&lt;</span>1<span>s</span>
+          </div>
           <div className="stat-label">Cold startup</div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -181,102 +240,140 @@ function StatsBar() {
 ───────────────────────────────────────────────────────────────────────── */
 const FEATURES = [
   {
-    icon: '🎨', iconStyle: 'purple', tag: 'EXCLUSIVE', tagStyle: '',
-    name: 'Canvas Mode',
-    desc: 'Edit any live webpage like Figma. Move elements, change styles, then export as HTML+CSS, HTML+Tailwind, React+CSS, or React+Tailwind. No other browser has this.',
+    icon: "🎨",
+    iconStyle: "purple",
+    tag: "EXCLUSIVE",
+    tagStyle: "",
+    name: "Canvas Mode",
+    desc: "Edit any live webpage like Figma. Move elements, change styles, then export as HTML+CSS, HTML+Tailwind, React+CSS, or React+Tailwind. No other browser has this.",
     highlight: true,
   },
   {
-    icon: '🛡️', iconStyle: 'teal', tag: 'NEW', tagStyle: 'new',
-    name: 'Privacy Suite',
-    desc: 'DNS-over-HTTPS, Encrypted Client Hello, fingerprint randomization, cookie partitioning, and data broker removal. Real privacy — not just a badge.',
+    icon: "🛡️",
+    iconStyle: "teal",
+    tag: "NEW",
+    tagStyle: "new",
+    name: "Privacy Suite",
+    desc: "DNS-over-HTTPS, Encrypted Client Hello, fingerprint randomization, cookie partitioning, and data broker removal. Real privacy — not just a badge.",
     highlight: false,
   },
   {
-    icon: '🗂️', iconStyle: 'purple', tag: 'WORKSPACE', tagStyle: '',
-    name: 'Workspaces & Spaces',
-    desc: 'Separate work, personal, and study into isolated workspaces. Each space has its own tabs, bookmarks, and profile. Switch in a single click.',
+    icon: "🗂️",
+    iconStyle: "purple",
+    tag: "WORKSPACE",
+    tagStyle: "",
+    name: "Workspaces & Spaces",
+    desc: "Separate work, personal, and study into isolated workspaces. Each space has its own tabs, bookmarks, and profile. Switch in a single click.",
     highlight: false,
   },
   {
-    icon: '⚡', iconStyle: 'gold', tag: 'PERFORMANCE', tagStyle: '',
-    name: 'Ultra-Fast Tabs',
-    desc: 'Tab switching under 50ms. Smart tab sleeping frees RAM automatically. Sub-1 second cold start. We measured everything so you get the fastest experience.',
+    icon: "⚡",
+    iconStyle: "gold",
+    tag: "PERFORMANCE",
+    tagStyle: "",
+    name: "Ultra-Fast Tabs",
+    desc: "Tab switching under 50ms. Smart tab sleeping frees RAM automatically. Sub-1 second cold start. We measured everything so you get the fastest experience.",
     highlight: false,
   },
   {
-    icon: '🔧', iconStyle: 'purple', tag: 'DEVELOPER', tagStyle: '',
-    name: 'Enhanced DevTools',
-    desc: 'Improved Network Inspector, better console filtering, DOM search by attribute, color palette extractor, font inspector, and response mocking — all built in.',
+    icon: "🔧",
+    iconStyle: "purple",
+    tag: "DEVELOPER",
+    tagStyle: "",
+    name: "Enhanced DevTools",
+    desc: "Improved Network Inspector, better console filtering, DOM search by attribute, color palette extractor, font inspector, and response mocking — all built in.",
     highlight: false,
   },
   {
-    icon: '🔐', iconStyle: 'teal', tag: 'SECURITY', tagStyle: 'new',
-    name: 'Password Vault',
-    desc: 'AES-256 encrypted local vault with autofill, strong password generation, and import from Chrome and Edge. Your passwords never leave your device.',
+    icon: "🔐",
+    iconStyle: "teal",
+    tag: "SECURITY",
+    tagStyle: "new",
+    name: "Password Vault",
+    desc: "AES-256 encrypted local vault with autofill, strong password generation, and import from Chrome and Edge. Your passwords never leave your device.",
     highlight: false,
   },
   {
-    icon: '📱', iconStyle: 'purple', tag: 'PROFILES', tagStyle: '',
-    name: 'Multi-Profile',
-    desc: 'Fully isolated Work, Personal, and Study profiles with separate cookies, bookmarks, history, and extensions. One browser, many identities.',
+    icon: "📱",
+    iconStyle: "purple",
+    tag: "PROFILES",
+    tagStyle: "",
+    name: "Multi-Profile",
+    desc: "Fully isolated Work, Personal, and Study profiles with separate cookies, bookmarks, history, and extensions. One browser, many identities.",
     highlight: false,
   },
   {
-    icon: '🎯', iconStyle: 'gold', tag: 'FOCUS', tagStyle: '',
-    name: 'Focus Mode',
-    desc: 'Built-in Pomodoro timer, site blocker, and daily time limits per domain. Stay in the zone without installing anything extra.',
+    icon: "🎯",
+    iconStyle: "gold",
+    tag: "FOCUS",
+    tagStyle: "",
+    name: "Focus Mode",
+    desc: "Built-in Pomodoro timer, site blocker, and daily time limits per domain. Stay in the zone without installing anything extra.",
     highlight: false,
   },
   {
-    icon: '🤖', iconStyle: 'purple', tag: 'AI', tagStyle: '',
-    name: 'AI Assistant',
-    desc: 'Browser-native AI chat and task execution. Ask it to summarize pages, automate multi-step tasks, or research across tabs — without leaving your browser.',
+    icon: "🤖",
+    iconStyle: "purple",
+    tag: "AI",
+    tagStyle: "",
+    name: "AI Assistant",
+    desc: "Browser-native AI chat and task execution. Ask it to summarize pages, automate multi-step tasks, or research across tabs — without leaving your browser.",
     highlight: false,
   },
-]
+];
 
 function Features() {
-  const cardRefs = useRef([])
+  const cardRefs = useRef([]);
 
   useEffect(() => {
-    const cards = cardRefs.current
+    const cards = cardRefs.current;
     const handlers = cards.map((card) => {
-      if (!card) return null
+      if (!card) return null;
       const handler = (e) => {
-        const rect = card.getBoundingClientRect()
-        card.style.setProperty('--mouse-x', ((e.clientX - rect.left) / rect.width * 100) + '%')
-        card.style.setProperty('--mouse-y', ((e.clientY - rect.top) / rect.height * 100) + '%')
-      }
-      card.addEventListener('mousemove', handler)
-      return handler
-    })
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty(
+          "--mouse-x",
+          ((e.clientX - rect.left) / rect.width) * 100 + "%",
+        );
+        card.style.setProperty(
+          "--mouse-y",
+          ((e.clientY - rect.top) / rect.height) * 100 + "%",
+        );
+      };
+      card.addEventListener("mousemove", handler);
+      return handler;
+    });
     return () => {
       cards.forEach((card, i) => {
-        if (card && handlers[i]) card.removeEventListener('mousemove', handlers[i])
-      })
-    }
-  }, [])
+        if (card && handlers[i])
+          card.removeEventListener("mousemove", handlers[i]);
+      });
+    };
+  }, []);
 
   return (
     <section id="features" className="features-section">
       <div className="section-inner">
         <div className="section-label">Features</div>
         <h2 className="section-title">
-          Not just a browser.<br />A workspace OS.
+          Not just a browser.
+          <br />A workspace OS.
         </h2>
         <p className="section-sub">
-          Every feature is intentional. Nothing is here just to fill a changelog.
+          Every feature is intentional. Nothing is here just to fill a
+          changelog.
         </p>
         <div className="features-grid">
           {FEATURES.map((f, i) => (
             <div
               key={i}
-              ref={el => { cardRefs.current[i] = el }}
-              className={'feature-card' + (f.highlight ? ' highlight' : '')}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              className={"feature-card" + (f.highlight ? " highlight" : "")}
             >
-              <div className={'feature-icon ' + f.iconStyle}>{f.icon}</div>
-              <div className={'feature-tag ' + f.tagStyle}>{f.tag}</div>
+              <div className={"feature-icon " + f.iconStyle}>{f.icon}</div>
+              <div className={"feature-tag " + f.tagStyle}>{f.tag}</div>
               <div className="feature-name">{f.name}</div>
               <div className="feature-desc">{f.desc}</div>
             </div>
@@ -284,46 +381,109 @@ function Features() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
    PRIVACY
 ───────────────────────────────────────────────────────────────────────── */
 const PRIVACY_LAYERS = [
-  { icon: '🔍', name: 'DNS-over-HTTPS', desc: 'ISP cannot see your domain lookups' },
-  { icon: '🔒', name: 'Encrypted Client Hello', desc: 'Hides domain even over HTTPS' },
-  { icon: '👤', name: 'Fingerprint Randomizer', desc: 'Canvas, WebGL, audio context spoofed' },
-  { icon: '🍪', name: 'Cookie Partitioning', desc: 'No cross-site tracking possible' },
-  { icon: '🗑️', name: 'Data Broker Removal', desc: '200+ brokers, automated opt-outs' },
-  { icon: '🚨', name: 'Breach Monitoring', desc: 'HaveIBeenPwned — instant alerts' },
-  { icon: '🔗', name: 'Link Cleaner', desc: 'Strips fbclid, gclid, UTM on every click' },
-]
+  {
+    icon: "🔍",
+    name: "DNS-over-HTTPS",
+    desc: "ISP cannot see your domain lookups",
+  },
+  {
+    icon: "🔒",
+    name: "Encrypted Client Hello",
+    desc: "Hides domain even over HTTPS",
+  },
+  {
+    icon: "👤",
+    name: "Fingerprint Randomizer",
+    desc: "Canvas, WebGL, audio context spoofed",
+  },
+  {
+    icon: "🍪",
+    name: "Cookie Partitioning",
+    desc: "No cross-site tracking possible",
+  },
+  {
+    icon: "🗑️",
+    name: "Data Broker Removal",
+    desc: "200+ brokers, automated opt-outs",
+  },
+  {
+    icon: "🚨",
+    name: "Breach Monitoring",
+    desc: "HaveIBeenPwned — instant alerts",
+  },
+  {
+    icon: "🔗",
+    name: "Link Cleaner",
+    desc: "Strips fbclid, gclid, UTM on every click",
+  },
+];
 
 const PRIVACY_POINTS = [
-  ['We collect zero data', 'No analytics, no telemetry, no usage tracking. What you browse is yours alone.'],
-  ['Everything runs locally', 'Phishing detection, password vault, privacy engine — no cloud calls, no latency.'],
-  ['Data broker automation', 'Aura submits opt-out requests to 200+ brokers on your behalf and re-runs every 90 days.'],
-  ['No ads, ever', 'We do not sell your data or show ads. Revenue comes from optional features, not your attention.'],
-  ['Open architecture', 'Built on Chromium. No custom DNS servers to trust, no VPN servers we operate.'],
-]
+  [
+    "We collect zero data",
+    "No analytics, no telemetry, no usage tracking. What you browse is yours alone.",
+  ],
+  [
+    "Everything runs locally",
+    "Phishing detection, password vault, privacy engine — no cloud calls, no latency.",
+  ],
+  [
+    "Data broker automation",
+    "Aura submits opt-out requests to 200+ brokers on your behalf and re-runs every 90 days.",
+  ],
+  [
+    "No ads, ever",
+    "We do not sell your data or show ads. Revenue comes from optional features, not your attention.",
+  ],
+  [
+    "Open architecture",
+    "Built on Chromium. No custom DNS servers to trust, no VPN servers we operate.",
+  ],
+];
 
 function Privacy() {
   return (
     <section id="privacy" className="privacy-section">
       <div className="section-inner">
-        <div style={{ textAlign: 'center' }}>
-          <div className="section-label" style={{ textAlign: 'center' }}>Privacy</div>
-          <h2 className="section-title" style={{ textAlign: 'center', margin: '0 auto 14px' }}>
-            Real privacy.<br />Not a marketing promise.
+        <div style={{ textAlign: "center" }}>
+          <div className="section-label" style={{ textAlign: "center" }}>
+            Privacy
+          </div>
+          <h2
+            className="section-title"
+            style={{ textAlign: "center", margin: "0 auto 14px" }}
+          >
+            Real privacy.
+            <br />
+            Not a marketing promise.
           </h2>
-          <p className="section-sub" style={{ margin: '0 auto', textAlign: 'center' }}>
-            Seven active protection layers, running locally, with no data ever leaving your device.
+          <p
+            className="section-sub"
+            style={{ margin: "0 auto", textAlign: "center" }}
+          >
+            Seven active protection layers, running locally, with no data ever
+            leaving your device.
           </p>
         </div>
         <div className="privacy-grid">
           <div className="privacy-visual">
-            <div style={{ fontSize: '11px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: 'var(--text-3)', marginBottom: '14px' }}>
+            <div
+              style={{
+                fontSize: "11px",
+                fontWeight: 700,
+                letterSpacing: "1.5px",
+                textTransform: "uppercase",
+                color: "var(--text-3)",
+                marginBottom: "14px",
+              }}
+            >
               Active Protection Layers
             </div>
             <div className="privacy-layers">
@@ -334,7 +494,9 @@ function Privacy() {
                     <div className="privacy-layer-name">{layer.name}</div>
                     <div className="privacy-layer-desc">{layer.desc}</div>
                   </div>
-                  <div className="privacy-layer-status status-active">Active</div>
+                  <div className="privacy-layer-status status-active">
+                    Active
+                  </div>
                 </div>
               ))}
             </div>
@@ -344,8 +506,25 @@ function Privacy() {
               <li key={i}>
                 <div className="privacy-check">&#10003;</div>
                 <div>
-                  <div style={{ fontWeight: 650, color: 'var(--text)', marginBottom: '4px', fontSize: '15px' }}>{title}</div>
-                  <div style={{ color: 'var(--text-2)', fontSize: '14px', lineHeight: '1.55' }}>{desc}</div>
+                  <div
+                    style={{
+                      fontWeight: 650,
+                      color: "var(--text)",
+                      marginBottom: "4px",
+                      fontSize: "15px",
+                    }}
+                  >
+                    {title}
+                  </div>
+                  <div
+                    style={{
+                      color: "var(--text-2)",
+                      fontSize: "14px",
+                      lineHeight: "1.55",
+                    }}
+                  >
+                    {desc}
+                  </div>
                 </div>
               </li>
             ))}
@@ -353,7 +532,7 @@ function Privacy() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -365,18 +544,28 @@ function Download() {
       <div className="dl-orb-1" />
       <div className="section-inner download-content">
         <div className="download-version">
-          <span style={{ width: 7, height: 7, borderRadius: '50%', background: 'var(--teal)', display: 'inline-block' }} />
+          <span
+            style={{
+              width: 7,
+              height: 7,
+              borderRadius: "50%",
+              background: "var(--teal)",
+              display: "inline-block",
+            }}
+          />
           Version 1.0.0 &mdash; Early Access
         </div>
         <h2 className="download-title">
           Download <em>Aura</em>
         </h2>
-        <p className="download-sub">Free. No account required. Install in seconds.</p>
+        <p className="download-sub">
+          Free. No account required. Install in seconds.
+        </p>
 
         <div className="platform-cards">
           {/* Windows — AVAILABLE NOW */}
           <a
-            href="https://github.com/YOUR_USERNAME/aura-browser/releases/latest/download/aura-1.0.0-setup.exe"
+            href="https://github.com/kareem1207/aura-browser-releases/releases/download/pre-release/aura_win.exe"
             className="platform-card available featured"
           >
             <div className="platform-badge">Available now</div>
@@ -413,22 +602,37 @@ function Download() {
 
         <p className="download-note">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-            <circle cx="7" cy="7" r="6" stroke="var(--text-3)" strokeWidth="1.2"/>
-            <path d="M7 6.5v3M7 4.5v.5" stroke="var(--text-3)" strokeWidth="1.2" strokeLinecap="round"/>
+            <circle
+              cx="7"
+              cy="7"
+              r="6"
+              stroke="var(--text-3)"
+              strokeWidth="1.2"
+            />
+            <path
+              d="M7 6.5v3M7 4.5v.5"
+              stroke="var(--text-3)"
+              strokeWidth="1.2"
+              strokeLinecap="round"
+            />
           </svg>
-          Hosted on{' '}
-          <a href="https://github.com/YOUR_USERNAME/aura-browser/releases" target="_blank" rel="noreferrer">
+          Hosted on{" "}
+          <a
+            href="https://github.com/YOUR_USERNAME/aura-browser/releases"
+            target="_blank"
+            rel="noreferrer"
+          >
             GitHub Releases
-          </a>
-          {' '}&middot; Free, no account required &middot; 189 MB installer
+          </a>{" "}
+          &middot; Free, no account required &middot; 189 MB installer
         </p>
-        <p className="download-note" style={{ marginTop: '8px' }}>
-          Want to be notified when macOS and Linux land?{' '}
+        <p className="download-note" style={{ marginTop: "8px" }}>
+          Want to be notified when macOS and Linux land?{" "}
           <a href="mailto:hello@aura-browser.app">Join the waitlist &rarr;</a>
         </p>
       </div>
     </section>
-  )
+  );
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -451,11 +655,17 @@ function Footer() {
           <a href="#features">Features</a>
           <a href="#privacy">Privacy</a>
           <a href="#download">Download</a>
-          <a href="https://github.com/YOUR_USERNAME/aura-browser" target="_blank" rel="noreferrer">GitHub</a>
+          <a
+            href="https://github.com/YOUR_USERNAME/aura-browser"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
         </div>
       </div>
     </footer>
-  )
+  );
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
@@ -474,5 +684,5 @@ export default function Page() {
       </main>
       <Footer />
     </>
-  )
+  );
 }
