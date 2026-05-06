@@ -565,7 +565,7 @@ function Download() {
         <div className="platform-cards">
           {/* Windows — AVAILABLE NOW */}
           <a
-            href="https://github.com/kareem1207/aura-browser-releases/releases/download/pre-release/aura_win.exe"
+            href="https://github.com/kareem1207/aura-browser-releases/releases/download/patch/aura_win_ad.exe"
             className="platform-card available featured"
           >
             <div className="platform-badge">Available now</div>
