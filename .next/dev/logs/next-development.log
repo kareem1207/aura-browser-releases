@@ -1,5 +1,2 @@
-{"timestamp":"00:00:02.252","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:00:39.752","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}
-{"timestamp":"00:00:40.047","source":"Browser","level":"ERROR","message":"uncaughtError: SyntaxError: Invalid or unexpected token"}
-{"timestamp":"00:00:40.050","source":"Server","level":"ERROR","message":"[browser] \"\\u001b[31mUncaught SyntaxError: Invalid or unexpected token\\u001b[39m\\n\\u001b[31mSyntaxError: Invalid or unexpected token\\u001b[39m\""}
-{"timestamp":"00:00:40.051","source":"Browser","level":"ERROR","message":"\u001b[31mUncaught SyntaxError: Invalid or unexpected token\u001b[39m\n\u001b[31mSyntaxError: Invalid or unexpected token\u001b[39m"}
+{"timestamp":"00:00:01.828","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:11.300","source":"Browser","level":"INFO","message":"%cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold"}

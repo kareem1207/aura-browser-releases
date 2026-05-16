@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Aura — An aura around everything you do</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300;1,9..144,500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://unpkg.com/lucide-static@0.395.0/font/lucide.css" />
+<style>
+:root{
+  --accent:#c8823a;
+  --accent-2:#e0a25b;
+  --bg:#0d0d0d; --bg-2:#141414; --bg-3:#1a1a1a; --border:rgba(255,255,255,0.06);
+  --border-hover:rgba(255,255,255,0.14); --text:#e8e3da; --text-2:#a0998d; --text-3:#555;
+  --green:#28c840; --amber:#ffbd2e; --red:#ff5f57;
+  --font-ui:'Inter Tight',system-ui,sans-serif;
+  --font-display:'Fraunces',serif; --font-display-style:italic;
+  --font-display-weight:300; --font-display-settings:'opsz' 144;
+  --font-mono:'JetBrains Mono',monospace;
+  --font-wordmark:'Instrument Serif',serif;
+  --radius:14px; --radius-lg:20px;
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --ease-soft:cubic-bezier(0.4,0,0.2,1);
+}
+/* FROST */
+[data-theme="frost"]{
+  --accent:#c8823a; --accent-2:#a8691f;
+  --bg:#f5f0e8; --bg-2:#efe9df; --bg-3:#e8e2d9;
+  --border:rgba(26,23,20,0.08); --border-hover:rgba(26,23,20,0.18);
+  --text:#1a1714; --text-2:#5b554c; --text-3:#8b8478;
+  --font-ui:'Manrope',system-ui,sans-serif;
+  --font-display:'Instrument Serif',serif; --font-display-style:normal;
+  --font-display-weight:400; --font-display-settings:normal;
+}
+/* NOIR (default) */
+[data-theme="noir"]{
+  --accent:#c8823a; --accent-2:#e0a25b;
+  --bg:#0d0d0d; --bg-2:#141414; --bg-3:#1a1a1a;
+  --border:rgba(255,255,255,0.06); --border-hover:rgba(255,255,255,0.14);
+  --text:#e8e3da; --text-2:#a0998d; --text-3:#666058;
+  --font-ui:'Inter Tight',system-ui,sans-serif;
+  --font-display:'Fraunces',serif; --font-display-style:italic;
+  --font-display-weight:300; --font-display-settings:'opsz' 144;
+}
+/* AURORA */
+[data-theme="aurora"]{
+  --accent:#3c7096; --accent-2:#5189b1;
+  --bg:#eaf2f8; --bg-2:#e2ecf4; --bg-3:#d8eef8;
+  --border:rgba(28,58,82,0.08); --border-hover:rgba(28,58,82,0.18);
+  --text:#1c3a52; --text-2:#3d5a72; --text-3:#7a8da0;
+  --font-ui:'Manrope',system-ui,sans-serif;
+  --font-display:'Cormorant Garamond',serif; --font-display-style:italic;
+  --font-display-weight:300; --font-display-settings:normal;
+  --green:#2e7d32; --mint:#6bcb77;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--font-ui);
+  background:var(--bg); color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+  transition: background 600ms var(--ease-out), color 600ms var(--ease-out);
+}
+::selection{background:var(--accent); color:#fff}
+a{color:inherit; text-decoration:none}
+
+/* Themed body backdrops */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(ellipse 110% 65% at 50% -20%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 70%),
+    radial-gradient(ellipse 80% 50% at 100% 100%, color-mix(in oklab, var(--accent) 6%, transparent), transparent 70%);
+  transition: opacity 600ms;
+}
+[data-theme="aurora"] body::before, body[data-theme="aurora"]::before{
+  background:
+    radial-gradient(ellipse 60% 50% at 12% 18%, #d8eef8 0%, transparent 60%),
+    radial-gradient(ellipse 50% 50% at 85% 22%, #e8e0f0 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 50% 100%, #c8e6c8 0%, transparent 60%);
+  animation: aurora-shift 18s ease-in-out infinite alternate;
+}
+@keyframes aurora-shift{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(-2%,1%,0) scale(1.04)}
+  100%{transform:translate3d(2%,-1%,0) scale(1.02)}
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none}}
+@keyframes fadeIn{from{opacity:0} to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)}}
+@keyframes orbDrift{0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(20px,-18px) scale(1.06)}}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.55;transform:scale(1.4)}}
+@keyframes breathe{0%,100%{opacity:.6} 50%{opacity:1}}
+@keyframes shimmer{0%{background-position:-200% 0} 100%{background-position:200% 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes marquee{from{transform:translateX(0)} to{transform:translateX(-50%)}}
+@keyframes ringIn{from{stroke-dashoffset:600} to{stroke-dashoffset:0}}
+@keyframes badgePop{0%{opacity:0;transform:scale(.85)} 60%{transform:scale(1.06)} 100%{opacity:1;transform:scale(1)}}
+@keyframes glowSweep{0%{transform:translateX(-120%)} 100%{transform:translateX(220%)}}
+
+.r{animation:fadeUp .9s var(--ease-out) both}
+.r.d1{animation-delay:.08s}
+.r.d2{animation-delay:.18s}
+.r.d3{animation-delay:.30s}
+.r.d4{animation-delay:.44s}
+.r.d5{animation-delay:.58s}
+.r.d6{animation-delay:.72s}
+
+/* ── Nav ────────────────────────────────────────────────────── */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  height:64px; padding:0 28px;
+  display:flex; align-items:center; justify-content:space-between;
+  background:color-mix(in oklab, var(--bg) 78%, transparent);
+  backdrop-filter:blur(22px) saturate(1.4);
+  border-bottom:1px solid var(--border);
+}
+.wordmark{
+  font-family:var(--font-wordmark); font-style:italic;
+  font-size:26px; letter-spacing:-.5px; color:var(--text);
+  display:flex; align-items:center; gap:10px;
+}
+.wordmark .a-italic{font-style:italic}
+.nav-right{display:flex; align-items:center; gap:4px}
+.nav-right a{
+  font-size:13px; color:var(--text-2); padding:7px 14px; border-radius:10px;
+  transition:color .2s, background .2s;
+}
+.nav-right a:hover{color:var(--text); background:color-mix(in oklab, var(--text) 6%, transparent)}
+.nav-cta{
+  background:var(--accent); color:#fff !important; font-weight:500;
+  border-radius:10px; padding:8px 16px !important;
+  box-shadow: 0 6px 18px color-mix(in oklab, var(--accent) 40%, transparent);
+  transition:transform .15s var(--ease-soft), box-shadow .2s;
+}
+.nav-cta:hover{transform:translateY(-1px); background:var(--accent-2) !important}
+
+/* Theme switcher */
+.theme-switch{
+  display:inline-flex; padding:4px; gap:2px;
+  background:color-mix(in oklab, var(--text) 6%, transparent);
+  border:1px solid var(--border); border-radius:999px;
+  margin-right:6px;
+}
+.theme-switch button{
+  font:inherit; cursor:pointer; border:0; background:transparent;
+  color:var(--text-2); font-size:12px; padding:5px 12px; border-radius:999px;
+  transition:color .2s, background .2s;
+  display:flex; align-items:center; gap:6px;
+}
+.theme-switch button .sw{
+  width:10px; height:10px; border-radius:50%;
+  background:linear-gradient(135deg, #f5f0e8, #c8823a);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.1);
+}
+.theme-switch button[data-t="noir"] .sw{background:linear-gradient(135deg,#0d0d0d 0 50%, #c8823a 50% 100%)}
+.theme-switch button[data-t="aurora"] .sw{background:linear-gradient(135deg,#d8eef8,#e8e0f0 50%, #c8e6c8)}
+.theme-switch button.active{background:var(--bg); color:var(--text); box-shadow:0 1px 4px rgba(0,0,0,.12)}
+
+/* ── Hero ───────────────────────────────────────────────────── */
+main{position:relative; z-index:1}
+.hero{
+  min-height:100vh; padding:120px 24px 60px;
+  display:grid; grid-template-columns:1.05fr .95fr;
+  gap:48px; max-width:1240px; margin:0 auto;
+  align-items:center; position:relative;
+}
+.hero-orb{position:absolute; border-radius:50%; filter:blur(100px); pointer-events:none; z-index:0}
+.hero-orb.o1{
+  width:620px; height:620px;
+  background:radial-gradient(circle, color-mix(in oklab, var(--accent) 22%, transparent), transparent 65%);
+  top:-180px; left:-120px; animation:orbDrift 18s ease-in-out infinite;
+}
+.hero-orb.o2{
+  width:480px; height:480px;
+  background:radial-gradient(circle, color-mix(in oklab, var(--accent) 16%, transparent), transparent 65%);
+  bottom:-120px; right:-100px; animation:orbDrift 22s ease-in-out infinite reverse;
+}
+.hero-left{position:relative; z-index:1}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:11px; font-weight:600; letter-spacing:1.4px; text-transform:uppercase;
+  color:var(--text-2);
+  padding:6px 12px; border:1px solid var(--border); border-radius:999px;
+  background:color-mix(in oklab, var(--bg) 60%, transparent);
+  animation:badgePop .7s var(--ease-out) .1s both;
+}
+.eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulseDot 2s ease-in-out infinite}
+
+.headline{
+  font-family:var(--font-display);
+  font-style:var(--font-display-style);
+  font-weight:var(--font-display-weight);
+  font-variation-settings:var(--font-display-settings);
+  font-size:clamp(54px, 7.4vw, 104px);
+  line-height:.96; letter-spacing:-.025em;
+  color:var(--text); margin:22px 0 18px;
+  text-wrap:balance;
+}
+.headline .accent-word{
+  color:var(--accent); font-style:italic;
+}
+[data-theme="noir"] .headline .accent-word{
+  background:linear-gradient(120deg, #c8823a, #e8b886 60%, #c8823a);
+  -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+}
+.headline .underline{
+  background:linear-gradient(180deg, transparent 72%, color-mix(in oklab, var(--accent) 35%, transparent) 72%, color-mix(in oklab, var(--accent) 35%, transparent) 88%, transparent 88%);
+  padding:0 .08em;
+}
+.sub{
+  font-size:18px; line-height:1.55; color:var(--text-2);
+  max-width:520px; font-weight:400;
+}
+.hero-actions{display:flex; gap:12px; margin:32px 0 22px; flex-wrap:wrap}
+.btn-primary{
+  display:inline-flex; align-items:center; gap:10px;
+  background:var(--accent); color:#fff;
+  border-radius:12px; padding:14px 22px;
+  font-size:14.5px; font-weight:600; letter-spacing:-.01em;
+  box-shadow:0 10px 28px color-mix(in oklab, var(--accent) 38%, transparent),
+             inset 0 1px 0 rgba(255,255,255,.18);
+  transition:transform .15s var(--ease-soft), box-shadow .2s, background .2s;
+  position:relative; overflow:hidden;
+}
+.btn-primary::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(110deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
+  transform:translateX(-120%); transition:transform .6s var(--ease-soft);
+}
+.btn-primary:hover{transform:translateY(-2px); background:var(--accent-2)}
+.btn-primary:hover::after{transform:translateX(220%)}
+.btn-primary:active{transform:translateY(0) scale(.98)}
+.btn-secondary{
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid var(--border); color:var(--text);
+  border-radius:12px; padding:13px 20px;
+  font-size:14.5px; font-weight:500;
+  background:color-mix(in oklab, var(--bg) 70%, transparent);
+  transition:border-color .2s, transform .15s var(--ease-soft), background .2s;
+}
+.btn-secondary:hover{border-color:var(--border-hover); transform:translateY(-1px)}
+
+.kicker-row{
+  margin-top:24px; display:flex; gap:22px; flex-wrap:wrap;
+  font-size:12px; color:var(--text-3);
+}
+.kicker-row span{display:inline-flex; align-items:center; gap:6px}
+.kicker-row span i{color:var(--green); font-size:14px}
+
+/* Hero right — product image stack */
+.hero-right{
+  position:relative; z-index:1;
+  display:flex; align-items:center; justify-content:center;
+  min-height:520px;
+}
+.product-stage{
+  position:relative; width:min(100%, 520px); aspect-ratio: 1;
+  display:flex; align-items:center; justify-content:center;
+}
+.product-stage::before{
+  content:""; position:absolute; inset:6%;
+  background:radial-gradient(circle, color-mix(in oklab, var(--accent) 22%, transparent), transparent 60%);
+  filter:blur(60px); z-index:0;
+  animation:breathe 4s ease-in-out infinite;
+}
+.product-img{
+  position:relative; z-index:2;
+  width:74%; aspect-ratio:1; object-fit:contain;
+  border-radius:32px;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,.35)) drop-shadow(0 0 30px color-mix(in oklab, var(--accent) 20%, transparent));
+  animation: float 7s ease-in-out infinite;
+  transition: filter 500ms;
+}
+[data-theme="frost"] .product-img{filter: drop-shadow(0 20px 40px rgba(26,23,20,.15)) drop-shadow(0 0 30px color-mix(in oklab, var(--accent) 22%, transparent))}
+[data-theme="aurora"] .product-img{filter: drop-shadow(0 20px 40px rgba(28,58,82,.18)) drop-shadow(0 0 40px rgba(60,112,150,.30))}
+
+/* Rotating compass ring around product */
+.compass-ring{
+  position:absolute; inset:0; pointer-events:none; z-index:1;
+  animation: spin 60s linear infinite;
+}
+.compass-ring svg{width:100%; height:100%}
+
+/* Orbiting chips */
+.orbit-chip{
+  position:absolute; z-index:3;
+  display:inline-flex; align-items:center; gap:8px;
+  padding:9px 14px; border-radius:999px;
+  background:color-mix(in oklab, var(--bg) 75%, transparent);
+  border:1px solid var(--border);
+  backdrop-filter:blur(16px);
+  font-size:12px; color:var(--text); font-weight:500;
+  box-shadow: 0 14px 30px rgba(0,0,0,.25), inset 0 1px 0 color-mix(in oklab, var(--text) 6%, transparent);
+  animation: float 6s ease-in-out infinite;
+}
+.orbit-chip i{color:var(--accent); font-size:14px}
+.orbit-chip.c1{top:8%; left:-2%; animation-delay:-1s}
+.orbit-chip.c2{top:42%; right:-6%; animation-delay:-3s}
+.orbit-chip.c3{bottom:6%; left:6%; animation-delay:-5s}
+
+/* Catchy line ribbon under the image */
+.catchy{
+  position:absolute; bottom:-12px; left:50%; transform:translateX(-50%);
+  font-family:var(--font-display);
+  font-style:var(--font-display-style);
+  font-weight:var(--font-display-weight);
+  font-size:22px; letter-spacing:-.01em;
+  color:var(--text-2); white-space:nowrap;
+  z-index:3;
+}
+.catchy em{color:var(--accent); font-style:italic}
+
+/* ── Marquee trust strip ────────────────────────────────────── */
+.trust{
+  border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  background:color-mix(in oklab, var(--bg) 92%, var(--text) 4%);
+  overflow:hidden; padding:18px 0; mask-image:linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+.trust-track{display:flex; gap:56px; width:max-content; animation: marquee 32s linear infinite}
+.trust-item{
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:var(--font-mono); font-size:12px; color:var(--text-3);
+  letter-spacing:.02em; text-transform:uppercase;
+}
+.trust-item i{font-size:14px; color:var(--accent)}
+
+/* ── Section base ───────────────────────────────────────────── */
+.section{padding:96px 24px; position:relative; z-index:1}
+.section.alt{background:color-mix(in oklab, var(--bg) 92%, var(--text) 4%)}
+.section-inner{max-width:1180px; margin:0 auto}
+.section-label{
+  font-size:11px; font-weight:700; letter-spacing:2px;
+  text-transform:uppercase; color:var(--accent); margin-bottom:14px;
+}
+.section-title{
+  font-family:var(--font-display);
+  font-style:var(--font-display-style);
+  font-weight:var(--font-display-weight);
+  font-variation-settings:var(--font-display-settings);
+  font-size:clamp(36px, 4.6vw, 60px);
+  line-height:1.04; letter-spacing:-.02em;
+  color:var(--text); margin-bottom:14px; text-wrap:balance;
+}
+.section-title em{color:var(--accent); font-style:italic}
+.section-sub{font-size:16px; color:var(--text-2); line-height:1.6; max-width:560px}
+
+/* ── Stats ──────────────────────────────────────────────────── */
+.stats-grid{
+  display:grid; grid-template-columns:repeat(4, 1fr);
+  gap:1px; background:var(--border); border:1px solid var(--border);
+  border-radius:var(--radius-lg); overflow:hidden; margin-top:40px;
+}
+.stat{
+  padding:28px 24px; background:var(--bg);
+  display:flex; flex-direction:column; gap:8px;
+  transition: background .25s;
+}
+.stat:hover{background:color-mix(in oklab, var(--bg) 70%, var(--text) 6%)}
+.stat-n{
+  font-family:var(--font-display);
+  font-style:var(--font-display-style);
+  font-weight:var(--font-display-weight);
+  font-variation-settings:var(--font-display-settings);
+  font-size:54px; line-height:.9; letter-spacing:-.03em; color:var(--text);
+}
+.stat-n .unit{color:var(--accent); font-size:.55em; margin-left:2px}
+.stat-l{font-size:13px; color:var(--text-3); letter-spacing:.02em}
+
+/* ── Features ───────────────────────────────────────────────── */
+.features-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:44px;
+}
+.fcard{
+  position:relative; padding:24px;
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--text) 4%, transparent) 0%, transparent 100%),
+    color-mix(in oklab, var(--bg) 96%, var(--text) 3%);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  transition: border-color .25s, transform .25s var(--ease-soft), box-shadow .3s;
+  overflow:hidden;
+}
+.fcard::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background: radial-gradient(380px circle at var(--mx,50%) var(--my,50%),
+              color-mix(in oklab, var(--accent) 14%, transparent), transparent 60%);
+  opacity:0; transition: opacity .3s;
+}
+.fcard:hover{transform:translateY(-3px); border-color:color-mix(in oklab, var(--accent) 30%, var(--border))}
+.fcard:hover::before{opacity:1}
+.fcard.span2{grid-column:span 2}
+.ficon{
+  width:42px; height:42px; border-radius:12px;
+  display:flex; align-items:center; justify-content:center;
+  background:color-mix(in oklab, var(--accent) 12%, transparent);
+  border:1px solid color-mix(in oklab, var(--accent) 22%, transparent);
+  color:var(--accent); font-size:20px; margin-bottom:16px;
+}
+.ftag{
+  display:inline-block; font-size:10.5px; font-weight:700;
+  letter-spacing:.8px; padding:3px 8px; border-radius:6px;
+  background:color-mix(in oklab, var(--accent) 12%, transparent);
+  color:var(--accent); margin-bottom:10px;
+}
+.fname{font-size:17px; font-weight:600; letter-spacing:-.01em; margin-bottom:6px; color:var(--text)}
+.fdesc{font-size:13.5px; line-height:1.6; color:var(--text-2)}
+
+.fcard.featured{
+  grid-column:span 2;
+  background:
+    linear-gradient(135deg, color-mix(in oklab, var(--accent) 12%, transparent), transparent 60%),
+    color-mix(in oklab, var(--bg) 96%, var(--text) 3%);
+}
+.fcard.featured .ficon{width:50px; height:50px}
+
+/* ── Privacy ────────────────────────────────────────────────── */
+.privacy-wrap{
+  margin-top:48px;
+  display:grid; grid-template-columns: 1.05fr .95fr; gap:48px; align-items:center;
+}
+.privacy-panel{
+  padding:26px; border:1px solid var(--border); border-radius:var(--radius-lg);
+  background:color-mix(in oklab, var(--bg) 92%, var(--text) 4%);
+  position:relative; overflow:hidden;
+}
+.privacy-panel::after{
+  content:""; position:absolute; inset:-1px;
+  background: linear-gradient(120deg, transparent, color-mix(in oklab, var(--accent) 24%, transparent), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 8s linear infinite;
+  pointer-events:none; opacity:.5;
+  mix-blend-mode: overlay;
+}
+.privacy-row{
+  display:flex; align-items:center; gap:14px;
+  padding:12px 14px; border:1px solid var(--border); border-radius:12px;
+  background:var(--bg);
+  margin-bottom:8px;
+  transition: border-color .2s, transform .15s var(--ease-soft);
+}
+.privacy-row:hover{border-color:var(--border-hover); transform:translateX(2px)}
+.privacy-row .ico{
+  width:32px; height:32px; border-radius:9px; display:flex; align-items:center; justify-content:center;
+  background:color-mix(in oklab, var(--accent) 12%, transparent); color:var(--accent); font-size:15px;
+}
+.privacy-row .pmeta{flex:1}
+.privacy-row .pname{font-size:13.5px; font-weight:600; color:var(--text); letter-spacing:-.01em}
+.privacy-row .pdesc{font-size:11.5px; color:var(--text-3); margin-top:1px}
+.privacy-row .pstatus{
+  font-family:var(--font-mono); font-size:10.5px; letter-spacing:.06em;
+  color:var(--green); padding:3px 8px;
+  background:color-mix(in oklab, var(--green) 14%, transparent);
+  border-radius:6px;
+}
+.privacy-list{list-style:none; display:flex; flex-direction:column; gap:18px}
+.privacy-list li{display:flex; gap:14px; align-items:flex-start}
+.privacy-list .check{
+  width:24px; height:24px; border-radius:8px; flex-shrink:0; margin-top:2px;
+  display:flex; align-items:center; justify-content:center; font-size:13px;
+  background:color-mix(in oklab, var(--accent) 14%, transparent);
+  color:var(--accent);
+}
+.privacy-list h4{font-size:15px; font-weight:600; color:var(--text); margin-bottom:4px; letter-spacing:-.01em}
+.privacy-list p{font-size:13.5px; line-height:1.55; color:var(--text-2)}
+
+/* ── Themes preview cards ───────────────────────────────────── */
+.themes-grid{
+  margin-top:48px; display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
+}
+.theme-card{
+  position:relative; border-radius:var(--radius-lg); overflow:hidden;
+  border:1px solid var(--border);
+  cursor:pointer; transition: transform .25s var(--ease-soft), box-shadow .3s, border-color .25s;
+  background:var(--bg-3);
+}
+.theme-card:hover{transform:translateY(-4px); box-shadow:0 24px 60px rgba(0,0,0,.25)}
+.theme-card .tc-img{
+  aspect-ratio: 4/3;
+  display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+}
+.theme-card .tc-img img{width:55%; height:auto; filter:drop-shadow(0 12px 30px rgba(0,0,0,.35))}
+.tc-frost{background:linear-gradient(155deg, #f5f0e8, #e8e2d9)}
+.tc-noir{background:linear-gradient(155deg, #0d0d0d, #1a1a1a)}
+.tc-aurora{background:linear-gradient(155deg, #d8eef8, #e8e0f0 50%, #c8e6c8)}
+.theme-card .tc-meta{padding:18px; background:var(--bg)}
+.theme-card .tc-name{
+  font-family:var(--font-display); font-style:var(--font-display-style);
+  font-weight:var(--font-display-weight); font-size:24px; color:var(--text);
+  letter-spacing:-.02em;
+}
+.theme-card .tc-desc{font-size:12.5px; color:var(--text-3); margin-top:4px}
+.theme-card .tc-swatches{display:flex; gap:6px; margin-top:14px}
+.theme-card .tc-swatches span{
+  width:18px; height:18px; border-radius:50%;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
+}
+
+/* ── Download ───────────────────────────────────────────────── */
+.dl-wrap{
+  text-align:center; position:relative; padding-top:20px;
+}
+.platform-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
+  max-width:900px; margin:48px auto 24px;
+}
+.pcard{
+  position:relative; padding:30px 18px 22px; text-align:center;
+  background:color-mix(in oklab, var(--bg) 96%, var(--text) 3%);
+  border:1px solid var(--border); border-radius:var(--radius-lg);
+  transition: transform .2s var(--ease-soft), border-color .2s, box-shadow .25s;
+}
+.pcard:hover{transform:translateY(-3px); border-color:var(--border-hover)}
+.pcard.available{cursor:pointer}
+.pcard.available:hover{border-color:color-mix(in oklab, var(--accent) 40%, transparent); box-shadow:0 18px 40px color-mix(in oklab, var(--accent) 14%, transparent)}
+.pbadge{
+  position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+  font-size:10px; font-weight:700; letter-spacing:.5px;
+  padding:3px 10px; border-radius:999px;
+  background:var(--accent); color:#fff;
+}
+.pbadge.soon{background:var(--bg-3); color:var(--text-3); border:1px solid var(--border)}
+.pcard.coming{opacity:.55}
+.picon{font-size:30px; color:var(--text); margin-bottom:10px; display:block}
+.pname{font-size:14.5px; font-weight:600; color:var(--text); margin-bottom:2px}
+.pdetail{font-size:11.5px; color:var(--text-3)}
+.parrow{
+  margin-top:14px; width:32px; height:32px; border-radius:10px; margin-inline:auto;
+  background:color-mix(in oklab, var(--accent) 12%, transparent);
+  color:var(--accent); display:flex; align-items:center; justify-content:center;
+  transition: background .2s, color .2s, transform .2s;
+}
+.pcard.available:hover .parrow{background:var(--accent); color:#fff; transform:translateY(2px)}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+footer{
+  padding:48px 24px; border-top:1px solid var(--border);
+  background:color-mix(in oklab, var(--bg) 92%, var(--text) 4%);
+  position:relative; z-index:1;
+}
+.foot{
+  max-width:1180px; margin:0 auto;
+  display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+}
+.foot .left{display:flex; flex-direction:column; gap:6px}
+.foot .copy{font-size:12px; color:var(--text-3)}
+.foot .links{display:flex; gap:24px}
+.foot .links a{font-size:13px; color:var(--text-3); transition:color .2s}
+.foot .links a:hover{color:var(--text)}
+
+/* ── Mobile ─────────────────────────────────────────────────── */
+@media (max-width: 920px){
+  .hero{grid-template-columns:1fr; padding-top:96px}
+  .privacy-wrap{grid-template-columns:1fr}
+  .features-grid{grid-template-columns:1fr}
+  .fcard.span2, .fcard.featured{grid-column:auto}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .themes-grid{grid-template-columns:1fr}
+  .platform-grid{grid-template-columns:repeat(2,1fr)}
+  .nav-right .nav-link{display:none}
+}
+</style>
+</head>
+<body data-theme="noir">
+
+<nav class="nav">
+  <a href="#" class="wordmark"><span>A</span><span class="a-italic" style="margin-left:-2px">ura</span></a>
+  <div class="nav-right">
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#privacy" class="nav-link">Privacy</a>
+    <a href="#themes" class="nav-link">Themes</a>
+    <div class="theme-switch" role="tablist" aria-label="Theme">
+      <button data-t="frost"><span class="sw"></span>Frost</button>
+      <button data-t="noir" class="active"><span class="sw"></span>Noir</button>
+      <button data-t="aurora"><span class="sw"></span>Aurora</button>
+    </div>
+    <a href="#download" class="nav-cta">Download</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-orb o1"></div>
+    <div class="hero-orb o2"></div>
+
+    <div class="hero-left">
+      <div class="eyebrow r"><span class="dot"></span>v1.0 · Early access · Beta soon</div>
+      <h1 class="headline r d1">
+        An <span class="accent-word">aura</span><br/>
+        around <span class="underline">everything</span><br/>
+        you do.
+      </h1>
+      <p class="sub r d2">A privacy-first agentic browser. Three moods — Frost, Noir, Aurora — one calm, fast, workspace-native shell that quietly does the work for you.</p>
+      <div class="hero-actions r d3">
+        <a class="btn-primary" href="#download"><i class="lucide icon-arrow-down-to-line"></i> Download for Windows</a>
+        <a class="btn-secondary" href="#features"><i class="lucide icon-sparkles"></i> See what it does</a>
+      </div>
+      <div class="kicker-row r d4">
+        <span><i class="lucide icon-check-circle-2"></i> Free forever</span>
+        <span><i class="lucide icon-check-circle-2"></i> Zero data collection</span>
+        <span><i class="lucide icon-check-circle-2"></i> Built on Chromium</span>
+      </div>
+    </div>
+
+    <div class="hero-right r d3">
+      <div class="product-stage">
+        <div class="compass-ring">
+          <svg viewBox="0 0 400 400" fill="none">
+            <circle cx="200" cy="200" r="190" stroke="currentColor" stroke-opacity=".18" stroke-width="1" stroke-dasharray="2 6"/>
+            <circle cx="200" cy="200" r="160" stroke="currentColor" stroke-opacity=".10" stroke-width="1"/>
+            <g stroke="currentColor" stroke-opacity=".22" stroke-width="1">
+              <line x1="200" y1="10"  x2="200" y2="30"/>
+              <line x1="200" y1="370" x2="200" y2="390"/>
+              <line x1="10"  y1="200" x2="30"  y2="200"/>
+              <line x1="370" y1="200" x2="390" y2="200"/>
+            </g>
+            <text x="200" y="22" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="currentColor" opacity=".5">N</text>
+            <text x="200" y="396" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="currentColor" opacity=".5">S</text>
+            <text x="6" y="204" font-family="JetBrains Mono" font-size="10" fill="currentColor" opacity=".5">W</text>
+            <text x="386" y="204" font-family="JetBrains Mono" font-size="10" fill="currentColor" opacity=".5">E</text>
+          </svg>
+        </div>
+        <img id="hero-img" class="product-img" src="assets/Aurora.png" alt="Aura browser product mark" />
+        <div class="orbit-chip c1"><i class="lucide icon-shield-check"></i> 14 trackers blocked</div>
+        <div class="orbit-chip c2"><i class="lucide icon-zap"></i> Tab switch &lt; 50ms</div>
+        <div class="orbit-chip c3"><i class="lucide icon-sparkles"></i> Canvas mode</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST MARQUEE -->
+  <div class="trust" aria-hidden="true">
+    <div class="trust-track">
+      <span class="trust-item"><i class="lucide icon-shield"></i> DNS-over-HTTPS</span>
+      <span class="trust-item"><i class="lucide icon-key-round"></i> AES-256 vault</span>
+      <span class="trust-item"><i class="lucide icon-fingerprint"></i> Fingerprint randomizer</span>
+      <span class="trust-item"><i class="lucide icon-globe"></i> Built on Chromium</span>
+      <span class="trust-item"><i class="lucide icon-eye-off"></i> Zero telemetry</span>
+      <span class="trust-item"><i class="lucide icon-cpu"></i> Local AI</span>
+      <span class="trust-item"><i class="lucide icon-trash-2"></i> 200+ data broker removals</span>
+      <span class="trust-item"><i class="lucide icon-zap"></i> &lt;1s cold start</span>
+      <!-- duplicate for seamless loop -->
+      <span class="trust-item"><i class="lucide icon-shield"></i> DNS-over-HTTPS</span>
+      <span class="trust-item"><i class="lucide icon-key-round"></i> AES-256 vault</span>
+      <span class="trust-item"><i class="lucide icon-fingerprint"></i> Fingerprint randomizer</span>
+      <span class="trust-item"><i class="lucide icon-globe"></i> Built on Chromium</span>
+      <span class="trust-item"><i class="lucide icon-eye-off"></i> Zero telemetry</span>
+      <span class="trust-item"><i class="lucide icon-cpu"></i> Local AI</span>
+      <span class="trust-item"><i class="lucide icon-trash-2"></i> 200+ data broker removals</span>
+      <span class="trust-item"><i class="lucide icon-zap"></i> &lt;1s cold start</span>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <section class="section">
+    <div class="section-inner">
+      <div class="section-label">By the numbers</div>
+      <h2 class="section-title">Quiet on the outside.<br/><em>Loud where it counts.</em></h2>
+      <div class="stats-grid">
+        <div class="stat"><div class="stat-n">118<span class="unit">+</span></div><div class="stat-l">Features shipped</div></div>
+        <div class="stat"><div class="stat-n">200<span class="unit">+</span></div><div class="stat-l">Data broker removals</div></div>
+        <div class="stat"><div class="stat-n">50<span class="unit">ms</span></div><div class="stat-l">Tab switch time</div></div>
+        <div class="stat"><div class="stat-n">0</div><div class="stat-l">Ads. Ever.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="section alt">
+    <div class="section-inner">
+      <div class="section-label">Features</div>
+      <h2 class="section-title">Not just a browser.<br/><em>A workspace OS.</em></h2>
+      <p class="section-sub">Every feature is intentional. Nothing here is filler.</p>
+
+      <div class="features-grid">
+        <article class="fcard featured">
+          <div class="ficon"><i class="lucide icon-pen-tool"></i></div>
+          <span class="ftag">Exclusive</span>
+          <h3 class="fname">Canvas mode</h3>
+          <p class="fdesc">Edit any live webpage like Figma — drag, restyle, replace — then export as HTML + CSS, HTML + Tailwind, React + CSS, or React + Tailwind. No other browser does this.</p>
+        </article>
+        <article class="fcard">
+          <div class="ficon"><i class="lucide icon-shield"></i></div>
+          <span class="ftag">Privacy</span>
+          <h3 class="fname">Privacy suite</h3>
+          <p class="fdesc">DoH, ECH, fingerprint randomizer, cookie partitioning, and a data-broker opt-out engine. Real privacy — not a badge.</p>
+        </article>
+        <article class="fcard">
+          <div class="ficon"><i class="lucide icon-layers"></i></div>
+          <span class="ftag">Workspaces</span>
+          <h3 class="fname">Workspaces &amp; spaces</h3>
+          <p class="fdesc">Separate work, personal, and study into isolated profiles. Switch in a click; nothing leaks across.</p>
+        </article>
+        <article class="fcard">
+          <div class="ficon"><i class="lucide icon-zap"></i></div>
+          <span class="ftag">Performance</span>
+          <h3 class="fname">Ultra-fast tabs</h3>
+          <p class="fdesc">&lt;50ms tab switches, &lt;1s cold start, smart tab sleeping. We measured everything.</p>
+        </article>
+        <article class="fcard">
+          <div class="ficon"><i class="lucide icon-bot"></i></div>
+          <span class="ftag">AI</span>
+          <h3 class="fname">Agent sidebar</h3>
+          <p class="fdesc">Ask Aura to summarize, extract, or run multi-step tasks across tabs. Local-first, no cloud hop.</p>
+        </article>
+        <article class="fcard">
+          <div class="ficon"><i class="lucide icon-terminal"></i></div>
+          <span class="ftag">Developer</span>
+          <h3 class="fname">Enhanced DevTools</h3>
+          <p class="fdesc">Better network inspector, DOM search by attribute, color &amp; font extractors, response mocking — built in.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section id="privacy" class="section">
+    <div class="section-inner">
+      <div style="text-align:center">
+        <div class="section-label" style="text-align:center">Privacy</div>
+        <h2 class="section-title" style="margin-left:auto;margin-right:auto">Real privacy.<br/><em>Not a marketing promise.</em></h2>
+        <p class="section-sub" style="margin:0 auto; text-align:center">Seven active protection layers, running locally — nothing leaves your device.</p>
+      </div>
+      <div class="privacy-wrap">
+        <div class="privacy-panel">
+          <div style="font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; color:var(--text-3); margin-bottom:14px; text-transform:uppercase">Active protection layers</div>
+          <div class="privacy-row"><div class="ico"><i class="lucide icon-search"></i></div><div class="pmeta"><div class="pname">DNS-over-HTTPS</div><div class="pdesc">ISP cannot see your lookups</div></div><div class="pstatus">ACTIVE</div></div>
+          <div class="privacy-row"><div class="ico"><i class="lucide icon-lock"></i></div><div class="pmeta"><div class="pname">Encrypted Client Hello</div><div class="pdesc">Hides domain even over TLS</div></div><div class="pstatus">ACTIVE</div></div>
+          <div class="privacy-row"><div class="ico"><i class="lucide icon-fingerprint"></i></div><div class="pmeta"><div class="pname">Fingerprint randomizer</div><div class="pdesc">Canvas, WebGL, audio spoofed</div></div><div class="pstatus">ACTIVE</div></div>
+          <div class="privacy-row"><div class="ico"><i class="lucide icon-cookie"></i></div><div class="pmeta"><div class="pname">Cookie partitioning</div><div class="pdesc">No cross-site tracking</div></div><div class="pstatus">ACTIVE</div></div>
+          <div class="privacy-row"><div class="ico"><i class="lucide icon-trash-2"></i></div><div class="pmeta"><div class="pname">Data broker removal</div><div class="pdesc">200+ brokers · re-runs every 90d</div></div><div class="pstatus">ACTIVE</div></div>
+          <div class="privacy-row"><div class="ico"><i class="lucide icon-link-2-off"></i></div><div class="pmeta"><div class="pname">Link cleaner</div><div class="pdesc">Strips fbclid, gclid, UTM on click</div></div><div class="pstatus">ACTIVE</div></div>
+        </div>
+        <ul class="privacy-list">
+          <li><div class="check"><i class="lucide icon-check"></i></div><div><h4>We collect zero data</h4><p>No analytics, no telemetry, no usage tracking. What you browse is yours alone.</p></div></li>
+          <li><div class="check"><i class="lucide icon-check"></i></div><div><h4>Everything runs locally</h4><p>Phishing detection, password vault, privacy engine — no cloud calls, no latency.</p></div></li>
+          <li><div class="check"><i class="lucide icon-check"></i></div><div><h4>Broker automation</h4><p>Aura submits opt-outs to 200+ brokers on your behalf and re-runs every 90 days.</p></div></li>
+          <li><div class="check"><i class="lucide icon-check"></i></div><div><h4>No ads. Ever.</h4><p>We don't sell your data or show ads. Revenue comes from optional features, not your attention.</p></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- THEMES -->
+  <section id="themes" class="section alt">
+    <div class="section-inner">
+      <div class="section-label">Three moods</div>
+      <h2 class="section-title">One browser.<br/><em>Three auras.</em></h2>
+      <p class="section-sub">Switch the entire shell with one click. Type, color, motion — all tuned per theme. Click a card to try it.</p>
+
+      <div class="themes-grid">
+        <div class="theme-card" data-theme-pick="frost">
+          <div class="tc-img tc-frost"><img src="assets/Frost.png" alt="Frost" /></div>
+          <div class="tc-meta">
+            <div class="tc-name">Frost</div>
+            <div class="tc-desc">Warm minimalism · Instrument Serif + Manrope · paper-like</div>
+            <div class="tc-swatches"><span style="background:#f5f0e8"></span><span style="background:#1a1714"></span><span style="background:#c8823a"></span><span style="background:#e8e2d9"></span></div>
+          </div>
+        </div>
+        <div class="theme-card" data-theme-pick="noir">
+          <div class="tc-img tc-noir"><img src="assets/Noir.png" alt="Noir" /></div>
+          <div class="tc-meta">
+            <div class="tc-name">Noir</div>
+            <div class="tc-desc">Dark editorial · Fraunces italic + Inter Tight · hushed</div>
+            <div class="tc-swatches"><span style="background:#0d0d0d"></span><span style="background:#1a1a1a"></span><span style="background:#c8823a"></span><span style="background:#e8e3da"></span></div>
+          </div>
+        </div>
+        <div class="theme-card" data-theme-pick="aurora">
+          <div class="tc-img tc-aurora"><img src="assets/Aurora.png" alt="Aurora" /></div>
+          <div class="tc-meta">
+            <div class="tc-name">Aurora</div>
+            <div class="tc-desc">Glassmorphic · Cormorant italic + Manrope · airy</div>
+            <div class="tc-swatches"><span style="background:#d8eef8"></span><span style="background:#e8e0f0"></span><span style="background:#c8e6c8"></span><span style="background:#3c7096"></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOWNLOAD -->
+  <section id="download" class="section">
+    <div class="section-inner dl-wrap">
+      <div class="section-label" style="text-align:center">Get Aura</div>
+      <h2 class="section-title" style="margin-left:auto;margin-right:auto"><em>Free.</em> No account.<br/>Install in seconds.</h2>
+      <p class="section-sub" style="margin:0 auto; text-align:center">v1.0 — early access. macOS &amp; Linux landing soon.</p>
+
+      <div class="platform-grid">
+        <a class="pcard available" href="#">
+          <div class="pbadge">Available now</div>
+          <i class="picon lucide icon-monitor"></i>
+          <div class="pname">Windows</div>
+          <div class="pdetail">Windows 10 / 11</div>
+          <div class="parrow"><i class="lucide icon-arrow-down"></i></div>
+        </a>
+        <div class="pcard coming">
+          <div class="pbadge soon">Coming soon</div>
+          <i class="picon lucide icon-apple"></i>
+          <div class="pname">macOS</div>
+          <div class="pdetail">Apple Silicon · Intel</div>
+        </div>
+        <div class="pcard coming">
+          <div class="pbadge soon">Coming soon</div>
+          <i class="picon lucide icon-terminal-square"></i>
+          <div class="pname">Linux</div>
+          <div class="pdetail">.deb · .AppImage</div>
+        </div>
+        <div class="pcard coming">
+          <div class="pbadge soon">Coming soon</div>
+          <i class="picon lucide icon-smartphone"></i>
+          <div class="pname">Mobile</div>
+          <div class="pdetail">Android · iOS</div>
+        </div>
+      </div>
+      <p style="font-size:12.5px; color:var(--text-3); margin-top:8px">Hosted on GitHub Releases · Free, no account · 189 MB</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div class="left">
+      <div class="wordmark" style="font-size:22px">Aura</div>
+      <div class="copy">© 2026 Aura Browser · Built with care in Hyderabad, India</div>
+    </div>
+    <div class="links">
+      <a href="#features">Features</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#themes">Themes</a>
+      <a href="#download">Download</a>
+      <a href="#">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Theme switcher ─────────────────────────────────────────
+  const body = document.body;
+  const heroImg = document.getElementById('hero-img');
+  const imgFor = { frost: 'assets/Frost.png', noir: 'assets/Noir.png', aurora: 'assets/Aurora.png' };
+  const buttons = [...document.querySelectorAll('.theme-switch button')];
+  function setTheme(name){
+    body.setAttribute('data-theme', name);
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.t === name));
+    if (heroImg && imgFor[name]) {
+      heroImg.style.opacity = 0;
+      setTimeout(() => { heroImg.src = imgFor[name]; heroImg.style.opacity = 1; }, 250);
+    }
+    try { localStorage.setItem('aura.theme', name); } catch(e){}
+  }
+  buttons.forEach(b => b.addEventListener('click', () => setTheme(b.dataset.t)));
+  document.querySelectorAll('[data-theme-pick]').forEach(c =>
+    c.addEventListener('click', () => setTheme(c.dataset.themePick))
+  );
+  try {
+    const saved = localStorage.getItem('aura.theme');
+    if (saved && imgFor[saved]) setTheme(saved);
+  } catch(e){}
+
+  // ── Smooth hero image fade transition ──────────────────────
+  if (heroImg) {
+    heroImg.style.transition = 'opacity .35s ease';
+  }
+
+  // ── Feature card spotlight ─────────────────────────────────
+  document.querySelectorAll('.fcard').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+  });
+
+  // ── Reveal-on-scroll ───────────────────────────────────────
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('r','d1'); io.unobserve(en.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.section-title, .section-sub, .fcard, .stat, .privacy-row, .privacy-list li, .theme-card, .pcard').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
