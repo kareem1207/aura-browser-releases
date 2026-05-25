@@ -334,7 +334,7 @@ function Download() {
         <h2 className="section-title io" style={{ marginInline: "auto" }}><em>Free.</em> No account.<br />Install in seconds.</h2>
         <p className="section-sub io" style={{ margin: "0 auto", textAlign: "center" }}>v1.0 — early access. macOS &amp; Linux landing soon.</p>
         <div className="platform-grid">
-          <a className="pcard available io" href="https://github.com/kareem1207/aura-browser-releases/releases/download/download/aura-0.8.5.exe">
+          <a className="pcard available io" href="https://github.com/kareem1207/aura-browser-releases/releases/download/download/aura-9.0.0-setup.exe">
             <div className="pbadge">Available now</div>
             <span className="picon brand" aria-label="Windows"><WindowsIcon /></span>
             <div className="pname">Windows</div>
