@@ -2,10 +2,10 @@
 import { WindowsIcon, AppleIcon, LinuxIcon } from "./PlatformIcons";
 
 const LINKS = {
-  windows: "https://github.com/kareem1207/aura-browser-releases/releases/download/Latest/aura-1.0.0-setup-win.exe",
-  macos: "https://github.com/kareem1207/aura-browser-releases/releases/download/Latest/aura-1.0.0.dmg",
-  linux: "https://github.com/kareem1207/aura-browser-releases/releases/download/Latest/aura-1.0.0.AppImage",
-  linuxDeb: "https://github.com/kareem1207/aura-browser-releases/releases/download/Latest/aura_1.0.0_amd64.deb",
+  windows: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.0.0-setup-win.exe",
+  macos: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.0.0.dmg",
+  linux: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.0.0.AppImage",
+  linuxDeb: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura_1.0.0_amd64.deb",
 };
 
 function trackClick(platform) {
@@ -21,17 +21,29 @@ export default function Download() {
     <section id="download" className="section alt">
       <div className="section-inner dl-wrap">
         <p><strong><em>
-          Aura is a browser built by one guy, named Shaik Kareem and that's me. 
-          You may see few bugs or lack of few features, I am very sorry as I am a solo developer i don't have the leverage and freedom that big tech gaints have, but i tried. 
-          It took 7 months to get complete, and Aura browser is built to never steal data fro9m anyone, and to be a privacy focused browser. I am not a big tech gaint, I am just a solo developer who is trying to make the web a better place.
+Aura is a browser built by one guy, named Shaik Kareem, and that's me. 
 
-          So please support me by downloading the browser, and if you like it, please share it with your friends and family.
-          You can also request or report a bug, the option is beside "Go" button inside the browser. I will try to fix it as soon as possible.
+You may encounter a few bugs, or you may miss a few features. I am very sorry, as I am a solo developer; I don't have the leverage and freedom that big tech giants have, but I tried. 
 
-          This website is developed by Ai, but the text ur seeing is written by me, and I will try to keep it updated as much as possible.
-          If my startup gets successful, I will try to make a better website for Aura browser, and I will try to make it open source as well. without using any ai. 
+It took me 7 months to reach where Aura stands right now, and Aura Browser is built to never steal data from anyone and to be a privacy-focused browser. I am not a big tech giant yet but a solo developer who is trying to make the web a better place.
+
+
+
+So please support me by downloading the browser, and if you like it, please share it with your friends and family.
+
+You can also request or report a bug; the option is beside the "Go" button inside the browser. I will try to fix it as soon as possible.
+
+
+
+This website is developed by AI, but the text you're seeing is written by me, and I will try to keep it updated as much as possible.
+
+If my startup gets successful, I will try to make a better website for the Aura browser, and I will try to make it open source as well without using any AI. 
+
           
-          Thank you for your support, and I hope you enjoy using Aura browser.
+
+Thank you for your support, and I hope you enjoy using the Aura browser.
+
+
           </em></strong></p>
         <div className="section-label io" style={{ marginInline: "auto" }}>Get Aura</div>
         <h2 className="section-title io" style={{ marginInline: "auto" }}><em>Free.</em> No account.<br />Install in seconds.</h2>
