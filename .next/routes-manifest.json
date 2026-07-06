@@ -40,6 +40,18 @@
       "regex": "^/_not\\-found(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/api/downloads",
+      "regex": "^/api/downloads(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/downloads(?:/)?$"
+    },
+    {
+      "page": "/api/track-download",
+      "regex": "^/api/track\\-download(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/track\\-download(?:/)?$"
     }
   ],
   "dataRoutes": [],

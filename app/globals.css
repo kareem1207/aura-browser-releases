@@ -611,7 +611,7 @@ main{position:relative; z-index:3}
 
 /* ── Download ────────────────────────────────────────────────── */
 .dl-wrap{text-align:center; position:relative; padding-top:20px}
-.platform-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; max-width:900px; margin:48px auto 24px}
+.platform-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:760px; margin:48px auto 24px}
 .pcard{
   position:relative; padding:30px 18px 22px; text-align:center;
   background:color-mix(in oklab, var(--bg) 96%, var(--text) 3%);
@@ -646,6 +646,36 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
 .io{ opacity:0; transform: translateY(28px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out) }
 .io.show{ opacity:1; transform: none }
 
+/* ── Feature category tabs ──────────────────────────────────── */
+.feature-tabs{ display:inline-flex; flex-wrap:wrap; gap:4px; padding:4px; margin-top:24px; background:color-mix(in oklab, var(--text) 6%, transparent); border:1px solid var(--border); border-radius:999px; }
+.feature-tab{ font:inherit; cursor:none; border:0; background:transparent; color:var(--text-2); font-size:13px; padding:8px 16px; border-radius:999px; transition:color .25s, background .25s; }
+.feature-tab.active{ background:var(--bg); color:var(--text); box-shadow:0 1px 4px rgba(0,0,0,.12); }
+
+/* ── Compact feature cards ──────────────────────────────────── */
+.feature-mini-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:28px; }
+.feature-card-mini{ padding:18px; border:1px solid var(--border); border-radius:var(--radius); background:color-mix(in oklab, var(--bg) 96%, var(--text) 3%); transition:border-color .25s, transform .2s var(--ease-soft); }
+.feature-card-mini:hover{ transform:translateY(-2px); border-color:color-mix(in oklab, var(--accent) 30%, var(--border)); }
+.fmi-icon{ width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; background:color-mix(in oklab, var(--accent) 12%, transparent); color:var(--accent); margin-bottom:10px; }
+.fmi-name{ font-size:14.5px; font-weight:600; color:var(--text); margin-bottom:4px; display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
+.fmi-desc{ font-size:12.5px; line-height:1.5; color:var(--text-2); }
+.fmi-subitems{ margin-top:8px; font-size:11px; color:var(--text-3); }
+
+/* ── App Lock spotlight ─────────────────────────────────────── */
+.applock-pill{ padding:6px 10px; border:1px solid var(--border); border-radius:8px; color:var(--text-2); }
+
+/* ── Live stats: city list ──────────────────────────────────── */
+.city-list{ margin-top:24px; display:flex; flex-direction:column; gap:6px; }
+.city-row{ display:flex; align-items:center; gap:12px; padding:10px 14px; border:1px solid var(--border); border-radius:10px; background:var(--bg); transition: border-color .2s, transform .15s var(--ease-soft); }
+.city-row:hover{ border-color:var(--border-hover); transform:translateX(2px); }
+.city-rank{ font-family:var(--font-mono); font-size:11px; color:var(--text-3); width:20px; }
+.city-name{ flex:1; font-size:13.5px; color:var(--text); }
+.city-count{ font-family:var(--font-mono); font-size:12px; color:var(--accent); }
+.city-showmore{ margin-top:10px; font-size:12.5px; color:var(--accent); background:none; border:0; cursor:none; }
+
+/* ── Downloads: SmartScreen note + secondary link ───────────── */
+.smartscreen-note{ font-size:12px; color:var(--text-3); max-width:520px; margin:14px auto 0; line-height:1.55; text-align:center; }
+.pcard-secondary{ display:block; margin-top:8px; font-size:11.5px; color:var(--text-3); text-decoration:underline; }
+
 @media (max-width: 920px){
   .hero{grid-template-columns:1fr; padding-top:96px}
   .privacy-wrap, .split{grid-template-columns:1fr}
@@ -653,7 +683,8 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   .fcard.featured{grid-column:auto}
   .stats-grid{grid-template-columns:repeat(2,1fr)}
   .themes-grid{grid-template-columns:1fr}
-  .platform-grid{grid-template-columns:repeat(2,1fr)}
+  .platform-grid{grid-template-columns:1fr}
+  .feature-mini-grid{grid-template-columns:1fr}
   .nav-right .nav-link{display:none}
   .theme-switch button{padding:5px 8px}
   .theme-switch button span:not(.sw){display:none}
