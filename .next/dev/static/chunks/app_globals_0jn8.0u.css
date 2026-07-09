@@ -2175,6 +2175,8 @@ footer {
   }
 
   .section-inner {
+    text-align: center;
+    width: 100%;
     padding: 0 16px;
   }
 
@@ -2230,6 +2232,7 @@ footer {
 
   .features-grid {
     grid-template-columns: 1fr;
+    width: 100%;
   }
 
   .fcard {
@@ -2284,6 +2287,7 @@ footer {
   .themes-grid {
     grid-template-columns: 1fr;
     justify-items: center;
+    width: 100%;
   }
 
   .theme-card .tc-name {
@@ -2293,6 +2297,7 @@ footer {
   .platform-grid {
     grid-template-columns: 1fr;
     gap: 10px;
+    width: 100%;
     max-width: 100%;
   }
 
@@ -2347,7 +2352,14 @@ footer {
   }
 
   .feature-mini-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+    width: 100%;
+  }
+
+  .feature-card-mini {
+    width: 100%;
+    max-width: 100%;
   }
 
   .city-list {
@@ -2396,6 +2408,8 @@ footer {
   }
 
   .section-inner {
+    text-align: center;
+    width: 100%;
     padding: 0 12px;
   }
 
@@ -2484,8 +2498,9 @@ footer {
 
   .features-grid {
     grid-template-columns: 1fr;
-    justify-items: center;
+    justify-items: stretch;
     gap: 10px;
+    width: 100%;
   }
 
   .fcard {
@@ -2562,6 +2577,10 @@ footer {
     text-align: center;
   }
 
+  .section > .section-inner {
+    margin-inline: auto;
+  }
+
   .section-title {
     margin-bottom: 10px;
     margin-left: auto;
@@ -2579,6 +2598,12 @@ footer {
     text-align: center;
     margin-bottom: 10px;
     font-size: 10px;
+  }
+
+  .dl-wrap > p:first-child {
+    text-align: center;
+    max-width: 620px;
+    margin: 0 auto 10px;
   }
 
   .trust-track {
@@ -2638,6 +2663,7 @@ footer {
   .platform-grid {
     grid-template-columns: 1fr;
     gap: 8px;
+    width: 100%;
     max-width: 100%;
     margin: 32px auto 16px;
   }
@@ -2676,6 +2702,7 @@ footer {
 
   .privacy-panel {
     width: 100%;
+    margin-inline: auto;
     padding: 14px;
   }
 
@@ -2708,6 +2735,7 @@ footer {
 
   .privacy-wrap {
     text-align: center;
+    justify-items: center;
   }
 
   .privacy-list li {
@@ -2736,7 +2764,8 @@ footer {
 
   .feature-mini-grid {
     grid-template-columns: 1fr;
-    justify-items: center;
+    justify-items: stretch;
+    width: 100%;
   }
 
   .feature-card-mini {
@@ -2751,6 +2780,16 @@ footer {
 
   .fmi-name {
     justify-content: center;
+  }
+
+  .city-list {
+    align-items: center;
+  }
+
+  .city-row {
+    text-align: center;
+    justify-content: center;
+    width: 100%;
   }
 
   footer {
@@ -2849,6 +2888,7 @@ footer {
 
   .section-inner {
     text-align: center;
+    width: 100%;
   }
 
   .section-title {
@@ -2861,6 +2901,11 @@ footer {
     margin-left: auto;
     margin-right: auto;
     font-size: 12.5px;
+  }
+
+  .dl-wrap > p:first-child {
+    max-width: 100%;
+    padding: 0 2px;
   }
 
   .stat {
@@ -2900,7 +2945,8 @@ footer {
   }
 
   .features-grid {
-    justify-items: center;
+    justify-items: stretch;
+    width: 100%;
   }
 
   .pcard {
@@ -2921,7 +2967,8 @@ footer {
   }
 
   .platform-grid {
-    justify-items: center;
+    justify-items: stretch;
+    width: 100%;
   }
 
   .privacy-panel {
@@ -2935,6 +2982,10 @@ footer {
 
   .privacy-wrap {
     text-align: center;
+  }
+
+  .privacy-list li {
+    justify-content: center;
   }
 
   .themes-grid {
@@ -2960,7 +3011,8 @@ footer {
   }
 
   .feature-mini-grid {
-    justify-items: center;
+    justify-items: stretch;
+    width: 100%;
   }
 
   .feature-card-mini {
@@ -2977,6 +3029,11 @@ footer {
     flex-direction: column;
     align-items: center;
     gap: 10px;
+  }
+
+  .foot .links {
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 

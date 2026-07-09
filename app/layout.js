@@ -8,8 +8,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body data-theme="noir">
+    <html lang="en" suppressHydrationWarning>
+      <body data-theme="noir" suppressHydrationWarning>
         {children}
         <Script src="https://unpkg.com/lucide@0.395.0/dist/umd/lucide.min.js" strategy="afterInteractive" />
       </body>

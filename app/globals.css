@@ -705,7 +705,11 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   .nav-right{gap:2px}
   .theme-switch{display:none}
   
-  .section-inner{padding:0 16px}
+  .section-inner{
+    padding:0 16px;
+    width:100%;
+    text-align:center;
+  }
   .hero{padding:80px 16px 40px; gap:24px; justify-items:center}
   .hero-left{width:100%; text-align:center}
   .hero-right{min-height:380px; width:100%; display:flex; justify-content:center}
@@ -719,6 +723,7 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   .hero-orb.o2{width:300px; height:300px; bottom:-80px; right:-80px}
   
   .features-grid{grid-template-columns:1fr}
+  .features-grid{width:100%}
   .fcard{padding:20px}
   .ficon{width:36px; height:36px; font-size:18px}
   .fname{font-size:15px}
@@ -734,9 +739,10 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   .section-sub{font-size:14.5px}
   
   .themes-grid{grid-template-columns:1fr; justify-items:center}
+  .themes-grid{width:100%}
   .theme-card .tc-name{font-size:20px}
   
-  .platform-grid{grid-template-columns:1fr; gap:10px; max-width:100%}
+  .platform-grid{grid-template-columns:1fr; gap:10px; max-width:100%; width:100%}
   .pcard{padding:24px 16px 18px; text-align:center}
   .picon{font-size:26px}
   .pname{font-size:13px}
@@ -749,7 +755,8 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   .privacy-list h4{font-size:13.5px}
   .privacy-list p{font-size:12.5px}
   
-  .feature-mini-grid{grid-template-columns:repeat(2,1fr)}
+  .feature-mini-grid{grid-template-columns:1fr; width:100%; justify-items:stretch}
+  .feature-card-mini{width:100%; max-width:100%}
   .city-list{text-align:center}
   
   footer{padding:36px 16px}
@@ -766,7 +773,11 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   .nav-right a{font-size:12px; padding:6px 10px}
   .nav-cta{padding:7px 12px !important; font-size:13px}
   
-  .section-inner{padding:0 12px}
+  .section-inner{
+    padding:0 12px;
+    width:100%;
+    text-align:center;
+  }
   .hero{padding:72px 12px 32px; gap:16px; justify-items:center}
   .hero-left{width:100%; text-align:center}
   .hero-right{min-height:320px; width:100%; display:flex; justify-content:center; align-items:center}
@@ -785,7 +796,7 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   .kicker-row{margin-top:16px; gap:12px; justify-content:center}
   .kicker-row span{font-size:11px}
   
-  .features-grid{grid-template-columns:1fr; gap:10px; justify-items:center}
+  .features-grid{grid-template-columns:1fr; gap:10px; justify-items:stretch; width:100%}
   .fcard{padding:16px; width:100%}
   .ficon{width:32px; height:32px; font-size:16px; margin-bottom:12px; margin-left:auto; margin-right:auto}
   .ftag{font-size:9.5px; padding:2px 6px}
@@ -801,9 +812,16 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   
   .section{padding:48px 12px; text-align:center}
   .section-inner{text-align:center}
+  .section > .section-inner{margin-inline:auto}
   .section-title{font-size:clamp(22px, 5.5vw, 32px); margin-bottom:10px; margin-left:auto; margin-right:auto}
   .section-sub{font-size:13.5px; margin-left:auto; margin-right:auto}
   .section-label{font-size:10px; margin-bottom:10px; text-align:center}
+
+  .dl-wrap > p:first-child{
+    max-width:620px;
+    margin:0 auto 10px;
+    text-align:center;
+  }
   
   .trust-track{gap:24px; justify-content:center}
   .trust-item{font-size:11px; gap:6px; display:flex; align-items:center}
@@ -818,7 +836,7 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   .theme-card .tc-swatches{justify-content:center}
   .theme-card .tc-swatches span{width:14px; height:14px}
   
-  .platform-grid{grid-template-columns:1fr; gap:8px; margin:32px auto 16px; max-width:100%}
+  .platform-grid{grid-template-columns:1fr; gap:8px; margin:32px auto 16px; max-width:100%; width:100%}
   .pcard{padding:20px 12px 14px; font-size:12px; text-align:center}
   .pbadge{font-size:9px; padding:2px 8px; top:-8px}
   .picon{font-size:24px; margin-bottom:8px}
@@ -827,21 +845,25 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   .parrow{width:28px; height:28px; font-size:14px}
   
   .privacy-panel{padding:14px; width:100%}
+  .privacy-panel{margin-inline:auto}
   .privacy-row{padding:8px 8px; gap:8px; margin-bottom:6px; border-radius:8px}
   .privacy-row .ico{width:24px; height:24px; font-size:12px; border-radius:6px}
   .privacy-row .pname{font-size:11.5px}
   .privacy-row .pdesc{font-size:10px}
   .privacy-row .pstatus{font-size:9px; padding:2px 6px}
   .privacy-wrap{text-align:center}
+  .privacy-wrap{justify-items:center}
   .privacy-list li{gap:8px; margin-bottom:12px; text-align:left}
   .privacy-list .check{width:18px; height:18px; font-size:10px; margin-top:0; flex-shrink:0}
   .privacy-list h4{font-size:12.5px; margin-bottom:2px}
   .privacy-list p{font-size:11.5px; line-height:1.5}
   
-  .feature-mini-grid{grid-template-columns:1fr; justify-items:center}
+  .feature-mini-grid{grid-template-columns:1fr; justify-items:stretch; width:100%}
   .feature-card-mini{width:100%; text-align:center}
   .fmi-icon{margin-left:auto; margin-right:auto}
   .fmi-name{justify-content:center}
+  .city-list{align-items:center}
+  .city-row{width:100%; justify-content:center; text-align:center}
   
   footer{padding:28px 12px; text-align:center}
   .foot{gap:12px; flex-direction:column; align-items:center}
@@ -871,9 +893,13 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   .kicker-row{gap:8px; font-size:10px; justify-content:center}
   
   .section{padding:40px 10px; text-align:center}
-  .section-inner{text-align:center}
+  .section-inner{
+    width:100%;
+    text-align:center;
+  }
   .section-title{font-size:clamp(20px, 6vw, 28px); margin-left:auto; margin-right:auto}
   .section-sub{font-size:12.5px; margin-left:auto; margin-right:auto}
+  .dl-wrap > p:first-child{max-width:100%; padding:0 2px}
   
   .stat{padding:14px 10px; margin-bottom:8px; text-align:center}
   .stat-n{font-size:28px; display:flex; align-items:center; justify-content:center}
@@ -882,17 +908,18 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   .ficon{width:28px; height:28px; font-size:14px; margin-bottom:10px; margin-left:auto; margin-right:auto}
   .fname{font-size:12.5px}
   .fdesc{font-size:11px}
-  .features-grid{justify-items:center}
+  .features-grid{justify-items:stretch; width:100%}
   
   .pcard{padding:16px 10px 10px; text-align:center}
   .picon{font-size:22px}
   .pname{font-size:11px}
   .pdetail{font-size:10px}
-  .platform-grid{justify-items:center}
+  .platform-grid{justify-items:stretch; width:100%}
   
   .privacy-panel{padding:12px}
   .privacy-row{padding:6px 6px; gap:6px}
   .privacy-wrap{text-align:center}
+  .privacy-list li{justify-content:center}
   
   .themes-grid{gap:8px; margin-top:24px; justify-items:center}
   .theme-card .tc-meta{text-align:center}
@@ -901,9 +928,10 @@ footer{padding:48px 24px; border-top:1px solid var(--border); background:color-m
   
   .platform-grid{margin:24px auto 12px}
   
-  .feature-mini-grid{justify-items:center}
+  .feature-mini-grid{justify-items:stretch; width:100%}
   .feature-card-mini{width:100%; text-align:center}
   
   footer{padding:20px 10px; text-align:center}
   .foot{gap:10px; flex-direction:column; align-items:center}
+  .foot .links{justify-content:center; flex-wrap:wrap}
 }
