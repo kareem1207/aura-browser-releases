@@ -1,8 +1,10 @@
 "use client";
 import { WindowsIcon, AppleIcon, LinuxIcon } from "./PlatformIcons";
 
+const WINDOWS_VERSION = "v1.0.3";
+
 const LINKS = {
-  windows: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.0.0-setup-win.exe",
+  windows: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.0.3-setup.exe",
   macos: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.0.0.dmg",
   linux: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.0.0.AppImage",
   linuxDeb: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura_1.0.0_amd64.deb",
@@ -47,13 +49,13 @@ Thank you for your support, and I hope you enjoy using the Aura browser.
           </em></strong></p>
         <div className="section-label io" style={{ marginInline: "auto" }}>Get Aura</div>
         <h2 className="section-title io" style={{ marginInline: "auto" }}><em>Free.</em> No account.<br />Install in seconds.</h2>
-        <p className="section-sub io" style={{ margin: "0 auto", textAlign: "center" }}>v1.0 — early access. Windows, macOS, and Linux, all available now.</p>
+        <p className="section-sub io" style={{ margin: "0 auto", textAlign: "center" }}>Early access. Windows, macOS, and Linux, all available now.</p>
         <div className="platform-grid">
           <a className="pcard available io" href={LINKS.windows} onClick={() => trackClick("windows")}>
             <div className="pbadge">Available now</div>
             <span className="picon brand" aria-label="Windows"><WindowsIcon /></span>
             <div className="pname">Windows</div>
-            <div className="pdetail">Windows 10 / 11</div>
+            <div className="pdetail">Windows 10 / 11 · {WINDOWS_VERSION}</div>
             <div className="parrow"><i data-lucide="arrow-down" /></div>
           </a>
           <a className="pcard available io" href={LINKS.macos} onClick={() => trackClick("macos")}>

@@ -17,7 +17,7 @@ export default function Hero({ theme }) {
       <div className="hero-orb o2" data-parallax="-0.08" />
 
       <div className="hero-left">
-        <div className="eyebrow"><span className="dot" /><i data-lucide="sparkles" className="star" /> v1.0 · Early access · Beta soon</div>
+        <div className="eyebrow"><span className="dot" /><i data-lucide="sparkles" className="star" /> Early access · Available now</div>
         <h1 className="headline" id="headline">
           <span className="line">
             <span className="word" style={{ animationDelay: ".05s" }}>An</span>{" "}
@@ -34,7 +34,7 @@ export default function Hero({ theme }) {
         </h1>
         <p className="sub r d3">A privacy-first agentic browser. Three moods — Frost, Noir, Aurora — one calm, fast, workspace-native shell that quietly does the work for you.</p>
         <div className="hero-actions r d4">
-          <a className="btn-primary magnetic" href="#download"><i data-lucide="download" /> Download for Windows</a>
+          <a className="btn-primary magnetic" href="#download"><i data-lucide="download" /> Download</a>
           <a className="btn-secondary" href="#features"><i data-lucide="play" /> See what it does</a>
         </div>
         <div className="kicker-row r d5">
