@@ -15,7 +15,7 @@ import { renderIcons } from "../lib/icons";
 const THEMES = ["frost", "noir", "aurora"];
 
 export default function Page() {
-  const [theme, setTheme] = useState("noir");
+  const [theme, setTheme] = useState("aurora");
   const initialized = useRef(false);
 
   // Load persisted theme once
@@ -135,7 +135,7 @@ export default function Page() {
 
     // Reveal on scroll
     const ioObs = new IntersectionObserver((ents) => {
-      ents.forEach((en) => { if (en.isIntersecting) { en.target.classList.add("show"); ioObs.unobserve(en.target); } });
+      ents.forEach((en) => { if (en.isIntersecting) { en.target.setAttribute("data-revealed", "true"); ioObs.unobserve(en.target); } });
     }, { threshold: 0.12 });
     document.querySelectorAll(".io").forEach((el) => ioObs.observe(el));
 
