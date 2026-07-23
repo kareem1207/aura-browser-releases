@@ -4,7 +4,7 @@ import { WindowsIcon, AppleIcon, LinuxIcon } from "./PlatformIcons";
 const WINDOWS_VERSION = "v1.0.3";
 
 const LINKS = {
-  windows: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.0.3-setup.exe",
+  windows: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.1.1-setup.exe",
   macos: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.0.0.dmg",
   linux: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.0.0.AppImage",
   linuxDeb: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura_1.0.0_amd64.deb",
