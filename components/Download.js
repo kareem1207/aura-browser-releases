@@ -1,13 +1,14 @@
 "use client";
+import { useEffect, useState } from "react";
 import { WindowsIcon, AppleIcon, LinuxIcon } from "./PlatformIcons";
 
-const WINDOWS_VERSION = "v1.0.3";
-
+// Each route redirects to the newest installer on the latest GitHub release,
+// so these never need updating when a new version ships.
 const LINKS = {
-  windows: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.1.1-setup.exe",
-  macos: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.0.0.dmg",
-  linux: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura-1.0.0.AppImage",
-  linuxDeb: "https://github.com/kareem1207/aura-browser-releases/releases/download/latest/aura_1.0.0_amd64.deb",
+  windows: "/api/download/windows",
+  macos: "/api/download/macos",
+  linux: "/api/download/linux",
+  linuxDeb: "/api/download/linux-deb",
 };
 
 function trackClick(platform) {
@@ -19,6 +20,15 @@ function trackClick(platform) {
 }
 
 export default function Download() {
+  const [windowsVersion, setWindowsVersion] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/release")
+      .then((r) => r.json())
+      .then((d) => setWindowsVersion(d?.windows?.version ?? null))
+      .catch(() => {});
+  }, []);
+
   return (
     <section id="download" className="section alt">
       <div className="section-inner dl-wrap">
@@ -55,7 +65,7 @@ Thank you for your support, and I hope you enjoy using the Aura browser.
             <div className="pbadge">Available now</div>
             <span className="picon brand" aria-label="Windows"><WindowsIcon /></span>
             <div className="pname">Windows</div>
-            <div className="pdetail">Windows 10 / 11 · {WINDOWS_VERSION}</div>
+            <div className="pdetail">Windows 10 / 11{windowsVersion ? ` · v${windowsVersion}` : ""}</div>
             <div className="parrow"><i data-lucide="arrow-down" /></div>
           </a>
           <a className="pcard available io" href={LINKS.macos} onClick={() => trackClick("macos")}>
